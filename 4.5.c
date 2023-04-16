@@ -96,43 +96,122 @@
 //		printf("NO\n");
 //	return 0;
 //}
-int look_up(int arr[][3], int* x, int* y, int k)
+//int look_up(int arr[][3], int* x, int* y, int k)
+//{
+//	
+//	int lines= 0;
+//	int ranks = *y-1;
+//	while (lines < x && ranks >= 0)
+//	{
+//		if (arr[lines][ranks] == k)
+//		{
+//			*x = lines;
+//			*y = ranks;
+//			return 1;
+//		}
+//		else if (k > arr[lines][ranks])
+//			lines++;
+//		else
+//			ranks--;
+//	}
+//	return 0;
+//}
+//int main()
+//{
+//	int arr[4][3] = { {1,3,5},{2,4,6},{7,9,11},{8,10,12} };
+//	int k=0;
+//	int tem = 0;
+//	int line = 4;
+//	int rank = 3;
+//	printf("请输入要查找的数:");
+//	scanf("%d",&k);
+//	tem=look_up(arr,&line,&rank,k);
+//	if (tem == 1)
+//	{
+//		printf("找到了\n");
+//		printf("下标是%d %d", line, rank);
+//		
+//	}
+//	else
+//		printf("找不到\n");
+//	return 0;
+//}
+//模拟strlen
+int my_strlen(char* arr)
+{
+	char* dest = arr;
+	while (*dest++ != '\0')
+		;
+	return (dest - arr-1);
+}
+int my_strcmp(const char* arr1, const char* arr2)
+{
+	assert(arr1 != NULL && arr2 != NULL);
+	while (*arr1 == *arr2)
+	{
+		if (*arr1 == '\0')
+			return 0;
+		arr1++;
+		arr2++;
+	}
+	return *arr1 - *arr2;
+}
+char* my_strcat( char* destination, const char* source)
+{
+	assert(destination != NULL && source != NULL);
+	while ((*destination))
+		destination++;
+		
+	while (*source)
+	{
+		*destination = *source;
+		destination++;
+		source++;
+	}
+	*destination='0';
+}
+char* my_strcpy(char* destation, const char* source)
 {
 	
-	int lines= 0;
-	int ranks = *y-1;
-	while (lines < x && ranks >= 0)
+	assert(destation != NULL && source != NULL);
+	while ((*destation++ = *source++))
+		;
+}
+char* my_strstr(const char* arr1,const char* arr2)
+{
+	while (*arr1)
 	{
-		if (arr[lines][ranks] == k)
+		while (*arr1 == *arr2)
 		{
-			*x = lines;
-			*y = ranks;
-			return 1;
+			char* tem = arr1;
+			arr1++;
+			arr2++;
+			if (*arr2 == '\0')
+				return tem;
+			else if(*arr1!=*arr2)
+				break;
 		}
-		else if (k > arr[lines][ranks])
-			lines++;
-		else
-			ranks--;
+		arr1++;
 	}
-	return 0;
+	return NULL;
 }
 int main()
 {
-	int arr[4][3] = { {1,3,5},{2,4,6},{7,9,11},{8,10,12} };
-	int k=0;
-	int tem = 0;
-	int line = 4;
-	int rank = 3;
-	printf("请输入要查找的数:");
-	scanf("%d",&k);
-	tem=look_up(arr,&line,&rank,k);
-	if (tem == 1)
-	{
-		printf("找到了\n");
-		printf("下标是%d %d", line, rank);
-		
-	}
+	char arr1[30] = { "abcdef" };
+	char arr2[] = { "ab" };
+	int len = my_strlen(arr1);
+	int tem = my_strcmp(arr1, arr2);
+	int* a = my_strstr(arr1, arr2);
+	my_strcat(arr1, arr2);
+	my_strcpy(arr1, arr2);
+	printf("%s\n", arr1);
+	printf("%d\n", tem);
+	if (*a = 0)
+		printf("没找到\n");
 	else
-		printf("找不到\n");
+	{
+		printf("找到了,地址是：");
+		printf("%p\n", a);
+	}
 	return 0;
 }
